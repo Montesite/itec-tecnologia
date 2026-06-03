@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demonstração de Vitrine — Itec Tecnologia</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:   #04080F;
+      --cyan: #00E5FF;
+      --blue: #2979FF;
+      --white:#F0F4FF;
+      --muted:rgba(240,244,255,0.45);
+      --line: rgba(0,229,255,0.15);
+      --h:    80px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    /* Trava scroll e remove barra de rolagem */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+    }
+
+    /* ─── HEADER 80px ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--h);
+      z-index: 1000;
+      background: rgba(4,8,15,0.98);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+    }
+
+    .h-inner {
+      width: 100%;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .h-logo img { height: 44px; width: auto; }
+
+    .h-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      opacity: .8;
+    }
+
+    .h-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 8px 16px;
+      border-radius: 2px;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+
+    .h-back:hover { color: var(--white); border-color: rgba(0,229,255,.4); }
+    .h-back svg   { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ─── IFRAME ─── */
+    /* height calculado via JS: 100vh - 80px */
+    .vitrine-wrap {
+      position: fixed;
+      top: var(--h);
+      left: 0;
+      right: 0;
+      width: 100%;
+      /* valor inicial; JS ajusta no resize */
+      height: calc(100vh - var(--h));
+    }
+
+    .vitrine-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 540px) {
+      :root { --h: 64px; }
+      .h-inner { padding: 0 18px; }
+      .h-logo img { height: 36px; }
+      .h-label { display: none; }
+      .h-back { font-size: 12px; padding: 7px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="h-inner">
+      <a href="index.html" class="h-logo" aria-label="Itec Tecnologia — página inicial">
+        <img src="logo.png" alt="Itec Automação e Segurança Eletrônica">
+      </a>
+      <span class="h-label">Demonstração de vitrine</span>
+      <a href="index.html" class="h-back" aria-label="Voltar ao site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Voltar ao site
+      </a>
+    </div>
+  </header>
+
+  <!-- IFRAME — vitrine eGestor -->
+  <div class="vitrine-wrap" id="vitrineWrap">
+    <iframe
+      src="https://itectecnologia2.egestor.com.br/vitrine/"
+      title="Vitrine Itec Tecnologia — produtos e equipamentos"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    /* Recalcula a altura exata no resize:
+       height = window.innerHeight - header (80px) */
+    var wrap = document.getElementById('vitrineWrap');
+    var H    = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--h')
+    ) || 80;
+
+    function fixHeight() {
+      wrap.style.height = (window.innerHeight - H) + 'px';
+    }
+
+    window.addEventListener('resize', fixHeight, { passive: true });
+    fixHeight();
+  </script>
+</body>
+</html>

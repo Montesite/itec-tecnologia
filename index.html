@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itec Tecnologia</title>
+  <meta name="description" content="Itec Automação e Segurança Eletrônica: redes estruturadas, CFTV, alarmes, automação residencial, PABX e muito mais em Bauru — SP. Desde 2013.">
+  <meta property="og:title" content="Itec Tecnologia | Automação e Segurança Eletrônica em Bauru — SP">
+  <meta property="og:description" content="Especialistas em redes estruturadas, segurança eletrônica, automação residencial e telefonia em Bauru e região desde 2013.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.itecautomacaoeseguranca.com.br">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:    #04080F;
+      --bg2:   #080D18;
+      --cyan:  #00E5FF;
+      --blue:  #2979FF;
+      --white: #F0F4FF;
+      --muted: rgba(240,244,255,0.45);
+      --line:  rgba(0,229,255,0.15);
+      --glass: rgba(0,229,255,0.04);
+      --h:     72px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+    }
+
+    /* ─── PROGRESS ─── */
+    #bar {
+      position:fixed; top:0; left:0; height:2px; width:0;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      z-index:2000; transition:width .1s linear;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      height:var(--h);
+      display:flex; align-items:center;
+      transition: background .3s, border-color .3s;
+      border-bottom: 1px solid transparent;
+    }
+
+    header.solid {
+      background: rgba(4,8,15,0.95);
+      border-color: var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .h-inner {
+      width:100%; max-width:1280px;
+      margin:0 auto; padding:0 32px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+
+    .h-logo img { height:44px; }
+
+    .h-nav { display:flex; align-items:center; gap:36px; }
+
+    .h-nav a {
+      font-size:13px; font-weight:500; letter-spacing:.5px;
+      color:var(--muted); text-decoration:none;
+      transition:color .2s;
+    }
+
+    .h-nav a:hover { color:var(--white); }
+
+    .h-cta {
+      font-size:12px; font-weight:700; letter-spacing:1px;
+      color:var(--bg) !important;
+      background:var(--cyan);
+      padding:9px 22px; border-radius:2px;
+      text-transform:uppercase;
+      transition:opacity .2s, transform .2s !important;
+    }
+
+    .h-cta:hover { opacity:.85; transform:translateY(-1px) !important; }
+
+    .h-vitrine {
+      font-size:12px; font-weight:600; letter-spacing:.5px;
+      color: var(--cyan) !important;
+      background: transparent;
+      padding: 8px 18px; border-radius:2px;
+      text-transform: uppercase;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      transition: border-color .2s, background .2s !important;
+    }
+
+    .h-vitrine:hover { border-color: rgba(0,229,255,.5); background: rgba(0,229,255,.06) !important; }
+
+    .h-toggle { display:none; background:none; border:none; cursor:pointer; padding:4px; }
+    .h-toggle span { display:block; width:22px; height:2px; background:var(--white); margin:5px 0; transition:.3s; }
+
+    .mobile-nav {
+      display:none; position:fixed;
+      top:var(--h); left:0; right:0;
+      background: rgba(4,8,15,0.98);
+      border-bottom:1px solid var(--line);
+      padding:24px 32px;
+      flex-direction:column; gap:4px; z-index:999;
+    }
+
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { color:var(--muted); text-decoration:none; font-size:17px; font-weight:500; padding:12px 0; border-bottom:1px solid var(--line); transition:color .2s; }
+    .mobile-nav a:hover { color:var(--white); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height:100vh;
+      padding-top:var(--h);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+      text-align:center;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(4,8,15,0.92), rgba(4,8,15,0.88)),
+        url('https://images.pexels.com/photos/5480781/pexels-photo-5480781.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-bg {
+      position:absolute; inset:0;
+      opacity:.12; pointer-events:none;
+    }
+
+    .orb {
+      position:absolute; border-radius:50%;
+      filter:blur(80px); pointer-events:none;
+    }
+
+    .orb-1 { width:500px; height:500px; background:rgba(0,229,255,.2); top:-120px; left:-80px; animation:drift 12s ease-in-out infinite; }
+    .orb-2 { width:400px; height:400px; background:rgba(41,121,255,.18); bottom:-100px; right:-60px; animation:drift 15s ease-in-out 3s infinite reverse; }
+    .orb-3 { width:250px; height:250px; background:rgba(0,229,255,.1); top:50%; left:50%; transform:translate(-50%,-50%); animation:orbPulse 4s ease-in-out infinite; }
+
+    @keyframes drift { 0%,100%{transform:translate(0,0)} 33%{transform:translate(40px,30px)} 66%{transform:translate(-20px,50px)} }
+    @keyframes orbPulse { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.3)} }
+
+    .hero-inner {
+      position:relative; z-index:1;
+      padding:60px 24px;
+      max-width:900px;
+    }
+
+    .hero-chip {
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      background:var(--glass);
+      padding:6px 16px; border-radius:100px;
+      font-size:11px; font-weight:600; letter-spacing:2px;
+      text-transform:uppercase; color:var(--cyan);
+      margin-bottom:32px;
+    }
+
+    .hero-chip::before {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:var(--cyan);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .hero h1 {
+      font-size:clamp(52px,8vw,112px);
+      font-weight:700;
+      line-height:.95;
+      letter-spacing:-3px;
+      margin-bottom:28px;
+    }
+
+    .hero h1 .line-1 { display:block; color:var(--white); }
+
+    .hero h1 .line-2 {
+      display:block;
+      background:linear-gradient(90deg,var(--blue),var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .hero-sub {
+      font-size:clamp(15px,1.8vw,18px);
+      color:var(--muted);
+      line-height:1.7;
+      max-width:560px;
+      margin:0 auto 44px;
+      font-weight:300;
+    }
+
+    .hero-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+    .btn-fill {
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--cyan); color:var(--bg);
+      font-family:'Space Grotesk',sans-serif;
+      font-size:13px; font-weight:700; letter-spacing:.5px;
+      padding:14px 32px; border-radius:2px;
+      text-decoration:none; border:2px solid var(--cyan);
+      transition:.3s;
+    }
+
+    .btn-fill:hover { background:transparent; color:var(--cyan); }
+
+    .btn-ghost {
+      display:inline-flex; align-items:center; gap:8px;
+      background:transparent; color:var(--muted);
+      font-family:'Space Grotesk',sans-serif;
+      font-size:13px; font-weight:500; letter-spacing:.5px;
+      padding:14px 32px; border-radius:2px;
+      text-decoration:none; border:2px solid var(--line);
+      transition:.3s;
+    }
+
+    .btn-ghost:hover { border-color:var(--white); color:var(--white); }
+
+    .hero-tags {
+      display:flex; justify-content:center; gap:10px;
+      flex-wrap:wrap; margin-top:56px;
+    }
+
+    .hero-tag {
+      font-size:11px; font-weight:600; letter-spacing:.5px;
+      color:var(--muted); border:1px solid var(--line);
+      padding:5px 14px; border-radius:100px;
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      padding:16px 0; background:var(--bg2);
+    }
+
+    .marquee-track {
+      display:flex; gap:56px;
+      animation:scroll 22s linear infinite;
+      width:max-content;
+    }
+
+    @keyframes scroll { to { transform:translateX(-50%); } }
+
+    .marquee-item {
+      display:flex; align-items:center; gap:10px;
+      font-size:12px; font-weight:600; letter-spacing:1.5px;
+      text-transform:uppercase; color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .marquee-item svg { width:14px; height:14px; color:var(--cyan); }
+    .marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--line); }
+
+    /* ─── STATS ─── */
+    .stats {
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:var(--bg2);
+      padding:80px 24px;
+    }
+
+    .stats-inner {
+      max-width:1280px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(4,1fr);
+    }
+
+    .stat {
+      padding:0 40px; text-align:center;
+      border-right:1px solid var(--line);
+    }
+
+    .stat:last-child { border-right:none; }
+
+    .stat-num {
+      font-family:'Space Mono',monospace;
+      font-size:clamp(40px,5vw,64px);
+      font-weight:700; letter-spacing:-2px;
+      background:linear-gradient(135deg,var(--white),var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text; line-height:1;
+      margin-bottom:10px;
+    }
+
+    .stat-label { font-size:13px; color:var(--muted); font-weight:500; letter-spacing:.5px; }
+
+    /* ─── SERVICES ─── */
+    .services {
+      /* padding horizontal = max(24px, metade do espaço excedente) — centraliza conteúdo sem max-width no element */
+      padding: 120px max(24px, calc((100% - 1280px) / 2));
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg);
+      background-image: url('https://images.pexels.com/photos/6466143/pexels-photo-6466143.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .services::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(4,8,15,0.88);
+      pointer-events: none;
+    }
+
+    .services > * { position: relative; z-index: 1; }
+
+    .sec-eyebrow {
+      display:inline-flex; align-items:center; gap:12px;
+      font-family:'Space Mono',monospace;
+      font-size:11px; color:var(--cyan);
+      letter-spacing:3px; text-transform:uppercase;
+      margin-bottom:20px;
+    }
+
+    .sec-eyebrow::before {
+      content:''; width:32px; height:1px; background:var(--cyan);
+    }
+
+    .sec-title {
+      font-size:clamp(36px,4.5vw,56px);
+      font-weight:700;
+      letter-spacing:-1.5px;
+      line-height:1.05;
+      margin-bottom:80px;
+      color:var(--white);
+    }
+
+    .sec-title em {
+      font-style:normal;
+      background:linear-gradient(90deg,var(--blue),var(--cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .svc-list { display:flex; flex-direction:column; }
+
+    .svc-item {
+      display:grid;
+      grid-template-columns:80px 1fr auto;
+      align-items:start;
+      gap:0 32px;
+      padding:36px 0;
+      border-top:1px solid var(--line);
+      position:relative;
+      cursor:default;
+    }
+
+    .svc-item:last-child { border-bottom:1px solid var(--line); }
+
+    .svc-item::before {
+      content:'';
+      position:absolute; left:0; right:0; top:0; height:1px;
+      background:linear-gradient(90deg,var(--cyan),transparent);
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .5s ease;
+    }
+
+    .svc-item:hover::before { transform:scaleX(1); }
+
+    .svc-num {
+      font-family:'Space Mono',monospace;
+      font-size:13px; color:var(--cyan); font-weight:700;
+      letter-spacing:1px; padding-top:4px;
+    }
+
+    .svc-name {
+      font-size:clamp(20px,2.5vw,28px);
+      font-weight:700; letter-spacing:-.5px;
+      color:var(--white); margin-bottom:10px;
+      transition:color .2s;
+    }
+
+    .svc-item:hover .svc-name { color:var(--cyan); }
+
+    .svc-desc { font-size:14px; color:var(--muted); line-height:1.7; max-width:520px; }
+
+    .svc-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+
+    .svc-tag {
+      font-size:10px; font-weight:600; letter-spacing:1px;
+      text-transform:uppercase;
+      border:1px solid var(--line);
+      color:var(--muted); padding:3px 10px; border-radius:100px;
+    }
+
+    .svc-icon {
+      width:52px; height:52px; border-radius:12px;
+      background:var(--glass); border:1px solid var(--line);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--cyan); flex-shrink:0;
+      transition:background .3s, border-color .3s, transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .svc-item:hover .svc-icon {
+      background:rgba(0,229,255,.1);
+      border-color:rgba(0,229,255,.4);
+      transform:rotate(-8deg) scale(1.1);
+    }
+
+    .svc-icon svg { width:24px; height:24px; }
+
+    /* ─── PRODUCTS ─── */
+    .products {
+      padding: 120px max(24px, calc((100% - 1280px) / 2));
+      border-top: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg2);
+      background-image: url('https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .products::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(4,8,15,0.88);
+      pointer-events: none;
+    }
+
+    .products > * { position: relative; z-index: 1; }
+
+    .prod-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:2px; margin-top:64px;
+      border:1px solid var(--line);
+    }
+
+    .prod-card {
+      padding:48px 44px;
+      background:var(--bg2);
+      border:1px solid transparent;
+      transition:.35s; position:relative; overflow:hidden;
+    }
+
+    .prod-card::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(0,229,255,.04),transparent);
+      opacity:0; transition:opacity .4s;
+    }
+
+    .prod-card:hover { border-color:var(--line); background:var(--bg); }
+    .prod-card:hover::after { opacity:1; }
+
+    .prod-num {
+      font-family:'Space Mono',monospace;
+      font-size:72px; font-weight:700; letter-spacing:-3px;
+      color:rgba(0,229,255,.08); line-height:1;
+      margin-bottom:20px; user-select:none;
+    }
+
+    .prod-icon {
+      width:56px; height:56px; border-radius:14px;
+      background:var(--glass); border:1px solid var(--line);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--cyan); margin-bottom:24px;
+      transition:transform .35s cubic-bezier(.34,1.56,.64,1), border-color .3s;
+    }
+
+    .prod-card:hover .prod-icon { transform:scale(1.12) rotate(-5deg); border-color:rgba(0,229,255,.4); }
+    .prod-icon svg { width:26px; height:26px; }
+
+    .prod-name { font-size:22px; font-weight:700; letter-spacing:-.5px; color:var(--white); margin-bottom:10px; }
+    .prod-desc { font-size:14px; color:var(--muted); line-height:1.7; }
+
+    /* ─── ABOUT ─── */
+    .about {
+      padding:120px 24px;
+      border-top:1px solid var(--line);
+      position:relative; overflow:hidden;
+      background-color: var(--bg2);
+      background-image: url('https://images.pexels.com/photos/4508751/pexels-photo-4508751.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .about::before {
+      content:''; position:absolute; inset:0;
+      background: rgba(8,13,24,0.90);
+      pointer-events:none;
+    }
+
+    .about-inner {
+      max-width:1280px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:80px; align-items:start;
+      position:relative; z-index:1;
+    }
+
+    .about-left { position:sticky; top:calc(var(--h) + 32px); }
+
+    .about-logo-wrap {
+      display:inline-flex; align-items:center; gap:16px;
+      background:var(--glass); border:1px solid var(--line);
+      padding:16px 24px; border-radius:8px; margin-bottom:40px;
+    }
+
+    .about-logo-wrap img { height:36px; }
+
+    .about-since {
+      font-family:'Space Mono',monospace;
+      font-size:12px; color:var(--cyan); letter-spacing:2px;
+    }
+
+    .about-left .sec-title { font-size:clamp(32px,3.5vw,48px); margin-bottom:28px; }
+    .about-lead { font-size:17px; color:var(--muted); line-height:1.75; font-weight:300; }
+
+    .about-timeline { display:flex; flex-direction:column; }
+
+    .tl-item {
+      display:grid; grid-template-columns:48px 1fr;
+      gap:0 24px; padding-bottom:40px; position:relative;
+    }
+
+    .tl-item:last-child { padding-bottom:0; }
+
+    .tl-left { display:flex; flex-direction:column; align-items:center; }
+
+    .tl-dot {
+      width:12px; height:12px; border-radius:50%;
+      background:var(--bg2); border:2px solid var(--cyan);
+      flex-shrink:0; margin-top:4px; transition:background .3s;
+    }
+
+    .tl-item:hover .tl-dot { background:var(--cyan); }
+
+    .tl-line { flex:1; width:1px; background:var(--line); margin:8px 0 0; }
+    .tl-item:last-child .tl-line { display:none; }
+
+    .tl-year { font-family:'Space Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:1px; margin-bottom:8px; }
+    .tl-title { font-size:17px; font-weight:700; color:var(--white); margin-bottom:8px; letter-spacing:-.3px; }
+    .tl-text { font-size:14px; color:var(--muted); line-height:1.65; }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      min-height:80vh;
+      display:grid; grid-template-columns:1fr 1fr;
+      border-top:1px solid var(--line);
+      position: relative;
+      background-color: var(--bg);
+      background-image: url('https://images.pexels.com/photos/30170004/pexels-photo-30170004.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .contact-left {
+      padding:80px 64px;
+      background: rgba(4,8,15,0.92);
+      border-right:1px solid var(--line);
+      display:flex; flex-direction:column; justify-content:center;
+      position: relative; z-index:1;
+    }
+
+    .contact-right {
+      padding:80px 64px;
+      background: rgba(8,13,24,0.90);
+      display:flex; flex-direction:column; justify-content:center;
+      position: relative; z-index:1;
+    }
+
+    .contact-left .sec-title { font-size:clamp(32px,3vw,52px); margin-bottom:16px; }
+    .contact-sub { font-size:16px; color:var(--muted); line-height:1.7; margin-bottom:48px; font-weight:300; }
+
+    .c-list { display:flex; flex-direction:column; gap:28px; }
+
+    .c-row { display:flex; align-items:flex-start; gap:18px; }
+
+    .c-bullet {
+      width:2px; min-height:40px;
+      background:linear-gradient(to bottom,var(--cyan),transparent);
+      flex-shrink:0; margin-top:2px;
+    }
+
+    .c-lbl { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); margin-bottom:4px; }
+    .c-val { font-size:15px; color:var(--muted); line-height:1.5; }
+    .c-val a { color:var(--muted); text-decoration:none; transition:color .2s; }
+    .c-val a:hover { color:var(--white); }
+
+    .contact-right h3 { font-size:clamp(24px,2.5vw,36px); font-weight:700; letter-spacing:-1px; color:var(--white); margin-bottom:16px; }
+    .contact-right p { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:36px; font-weight:300; }
+
+    .cta-stack { display:flex; flex-direction:column; gap:12px; }
+
+    .cta-wa {
+      display:flex; align-items:center; gap:12px;
+      background:#25D366; color:#fff;
+      padding:16px 28px; border-radius:2px;
+      font-size:14px; font-weight:700;
+      text-decoration:none; letter-spacing:.5px;
+      border:2px solid #25D366; transition:.3s;
+    }
+
+    .cta-wa:hover { background:transparent; color:#25D366; }
+    .cta-wa svg { width:20px; height:20px; fill:white; flex-shrink:0; }
+    .cta-wa:hover svg { fill:#25D366; }
+
+    .cta-mail {
+      display:flex; align-items:center; gap:12px;
+      background:transparent; color:var(--muted);
+      padding:16px 28px; border-radius:2px;
+      font-size:14px; font-weight:600;
+      text-decoration:none; letter-spacing:.5px;
+      border:2px solid var(--line); transition:.3s;
+    }
+
+    .cta-mail:hover { border-color:var(--white); color:var(--white); }
+    .cta-mail svg { width:18px; height:18px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top:1px solid var(--line);
+      background:var(--bg);
+      padding:56px 24px 40px;
+      position:relative;
+    }
+
+    footer::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    }
+
+    .foot-inner {
+      max-width:1280px; margin:0 auto;
+      display:grid; grid-template-columns:2fr 1fr 1fr;
+      gap:56px; margin-bottom:48px;
+    }
+
+    .foot-logo img { height:44px; margin-bottom:16px; }
+    .foot-desc { font-size:13px; color:var(--muted); line-height:1.7; max-width:260px; }
+
+    .foot-title { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--cyan); margin-bottom:18px; opacity:.7; }
+
+    .foot-links { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .foot-links a { font-size:13px; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .foot-links a:hover { color:var(--white); }
+
+    .foot-bottom {
+      border-top:1px solid var(--line); padding-top:28px;
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    }
+
+    .foot-bottom p, .foot-bottom span { font-size:12px; color:rgba(240,244,255,.25); }
+
+    /* ─── WHATSAPP ─── */
+    .wfloat {
+      position:fixed; bottom:28px; right:28px; z-index:900;
+      width:54px; height:54px; border-radius:50%;
+      background:#25D366;
+      display:flex; align-items:center; justify-content:center;
+      text-decoration:none;
+      box-shadow:0 4px 20px rgba(37,211,102,.4);
+      transition:transform .3s, box-shadow .3s;
+    }
+
+    .wfloat:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(37,211,102,.55); }
+    .wfloat svg { width:26px; height:26px; fill:white; }
+
+    /* ─── SCROLL REVEAL ─── */
+    [data-r] {
+      opacity:0;
+      transition:opacity .7s cubic-bezier(.22,.68,0,1.2), transform .7s cubic-bezier(.22,.68,0,1.2);
+    }
+
+    [data-r="up"]    { transform:translateY(40px); }
+    [data-r="left"]  { transform:translateX(-40px); }
+    [data-r="right"] { transform:translateX(40px); }
+    [data-r="scale"] { transform:scale(0.88); }
+
+    [data-r].vis { opacity:1; transform:none; }
+
+    [data-d="1"] { transition-delay:.08s; }
+    [data-d="2"] { transition-delay:.16s; }
+    [data-d="3"] { transition-delay:.24s; }
+    [data-d="4"] { transition-delay:.32s; }
+
+    /* Hero entrance */
+    .hero-chip    { animation:fadeUp .7s ease .1s both; }
+    .hero h1      { animation:fadeUp .9s ease .25s both; }
+    .hero-sub     { animation:fadeUp .8s ease .42s both; }
+    .hero-actions { animation:fadeUp .8s ease .56s both; }
+    .hero-tags    { animation:fadeUp .7s ease .72s both; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:none} }
+
+    /* ─── RESPONSIVE ─── */
+    /* ════ RESPONSIVO ════ */
+
+    /* ── 1280px: desktop médio ── */
+    @media(max-width:1280px) {
+      .hero-inner { max-width:760px; }
+    }
+
+    /* ── 1100px: desktop pequeno ── */
+    @media(max-width:1100px) {
+      .stats-inner { grid-template-columns:repeat(2,1fr); gap:0; }
+      .stat { border-bottom:1px solid var(--line); padding:36px 32px; }
+      .stat:nth-child(2) { border-right:none; }
+      .stat:nth-child(3),.stat:nth-child(4) { border-bottom:none; }
+    }
+
+    /* ── 1024px: tablet landscape ── */
+    @media(max-width:1024px) {
+      /* Serviços e produtos: simplifica padding */
+      .services,.products {
+        padding: 100px 32px;
+      }
+
+      /* About: 1 coluna */
+      .about { padding:100px 32px; }
+      .about-inner { grid-template-columns:1fr; gap:56px; }
+      .about-left { position:static; }
+
+      /* Service items: apenas número + corpo */
+      .svc-item { grid-template-columns:64px 1fr; gap:0 24px; }
+      .svc-icon { display:none; }
+
+      /* Products: 1 coluna */
+      .prod-grid { grid-template-columns:1fr; }
+
+      /* Vitrine section: 1 coluna */
+      #vitrine > [data-r] {
+        grid-template-columns:1fr !important;
+        gap:48px !important;
+      }
+      #vitrine > [data-r] > div:last-child { display:none; }
+
+      /* Contact: 1 coluna */
+      .contact { grid-template-columns:1fr; min-height:auto; }
+      .contact-left { border-right:none; border-bottom:1px solid var(--line); }
+      .contact-left,.contact-right { padding:64px 40px; }
+
+      /* Footer: 2 colunas */
+      .foot-inner { grid-template-columns:1fr 1fr; gap:36px; }
+    }
+
+    /* ── 900px: tablet médio ── */
+    @media(max-width:900px) {
+      /* Svc: remove número, só corpo */
+      .svc-item { grid-template-columns:1fr; gap:6px; padding:28px 0; }
+      .svc-num { margin-bottom:4px; }
+
+      /* Prod cards: padding menor */
+      .prod-card { padding:40px 32px; }
+      .prod-num { font-size:52px; }
+
+      /* Stats: 2×2 compacto */
+      .stat { padding:28px 20px; }
+    }
+
+    /* ── 768px: tablet portrait / mobile grande ── */
+    @media(max-width:768px) {
+      :root { --h:64px; }
+
+      /* Header */
+      header { background:rgba(4,8,15,.98); border-bottom:1px solid var(--line); }
+      .h-nav,.h-vitrine { display:none; }
+      .h-toggle { display:block; }
+
+      /* Hero */
+      .hero h1 { letter-spacing:-1.5px; }
+      .hero-sub { font-size:15px; }
+      .hero-tags { display:none; }
+      .hero-actions {
+        flex-direction:column;
+        align-items:center;
+        gap:10px;
+      }
+      .btn-fill,.btn-ghost {
+        width:100%; max-width:300px;
+        justify-content:center;
+      }
+
+      /* Sections padding */
+      .services,.products,.about { padding:80px 20px; }
+
+      /* Stats: 2×2 */
+      .stats { padding:60px 20px; }
+      .stats-inner { grid-template-columns:repeat(2,1fr); gap:0; }
+      .stat { padding:28px 20px; border-bottom:1px solid var(--line); }
+      .stat:nth-child(2) { border-right:none; }
+      .stat:nth-child(3),.stat:nth-child(4) { border-bottom:none; }
+      .stat-num { font-size:40px; }
+
+      /* About */
+      .about-inner { gap:44px; }
+
+      /* Contact */
+      .contact-left,.contact-right { padding:52px 24px; }
+
+      /* Footer */
+      .foot-inner { grid-template-columns:1fr; gap:28px; }
+      .foot-bottom { flex-direction:column; text-align:center; gap:8px; }
+      footer { padding:44px 20px 32px; }
+
+      /* Marquee: velocidade menor em mobile */
+      .marquee-track { animation-duration:16s; }
+    }
+
+    /* ── 640px: mobile grande ── */
+    @media(max-width:640px) {
+      .hero-inner { padding:48px 20px; }
+      .hero h1 { font-size:clamp(40px,10vw,64px); letter-spacing:-1px; }
+      .hero-chip { font-size:10px; letter-spacing:1.5px; }
+
+      .btn-fill,.btn-ghost { max-width:100%; padding:13px 20px; font-size:13px; }
+
+      .svc-name { font-size:20px; }
+      .svc-desc { font-size:13px; }
+
+      .prod-card { padding:32px 24px; }
+      .prod-num { font-size:44px; }
+      .prod-name { font-size:18px; }
+
+      .tl-title { font-size:15px; }
+
+      .contact-left,.contact-right { padding:44px 20px; }
+
+      .wfloat { width:50px; height:50px; bottom:20px; right:16px; }
+    }
+
+    /* ── 480px: mobile médio ── */
+    @media(max-width:480px) {
+      :root { --h:58px; }
+
+      .hero-inner { padding:40px 14px; }
+      .hero h1 { font-size:42px; letter-spacing:-.5px; }
+      .hero-sub { font-size:14px; line-height:1.65; }
+
+      /* Stats: 2 colunas compactas */
+      .stats { padding:48px 14px; }
+      .stat { padding:22px 14px; }
+      .stat-num { font-size:34px; }
+      .stat-label { font-size:12px; }
+
+      /* Services */
+      .services { padding:64px 14px !important; }
+      .sec-title { font-size:clamp(28px,7vw,40px); margin-bottom:48px; }
+      .svc-item { padding:22px 0; }
+      .svc-name { font-size:18px; }
+      .svc-tags { gap:4px; }
+      .svc-tag { font-size:9px; padding:2px 8px; }
+
+      /* Products */
+      .products { padding:64px 14px !important; }
+      .prod-card { padding:28px 18px; }
+      .prod-num { font-size:36px; margin-bottom:12px; }
+      .prod-icon { width:44px; height:44px; margin-bottom:16px; }
+      .prod-name { font-size:16px; }
+
+      /* About */
+      .about { padding:64px 14px !important; }
+      .about-inner { gap:36px; }
+      .about-logo-wrap { padding:12px 18px; margin-bottom:28px; }
+      .about-logo-wrap img { height:30px; }
+      .tl-item { padding-bottom:28px; }
+
+      /* Contact */
+      .contact-left,.contact-right { padding:40px 14px; }
+      .contact-left .sec-title { font-size:28px; }
+      .contact-right h3 { font-size:24px; }
+      .cta-wa,.cta-mail { padding:13px 18px; font-size:13px; }
+
+      /* Footer */
+      footer { padding:40px 14px 28px; }
+      .foot-inner { gap:24px; }
+      .foot-logo img { height:38px; }
+
+      .wfloat { width:46px; height:46px; bottom:16px; right:12px; }
+      .wfloat svg { width:22px; height:22px; }
+    }
+
+    /* ── 375px: mobile pequeno ── */
+    @media(max-width:375px) {
+      .hero h1 { font-size:36px; }
+      .hero-chip { display:none; }
+      .hero-actions { gap:8px; }
+      .btn-fill,.btn-ghost { padding:12px 16px; font-size:12px; }
+
+      .stats-inner { grid-template-columns:1fr; }
+      .stat { border-right:none !important; border-bottom:1px solid var(--line) !important; }
+      .stat:last-child { border-bottom:none !important; }
+
+      .sec-title { font-size:26px; margin-bottom:36px; }
+      .svc-name { font-size:17px; }
+
+      .prod-card { padding:24px 16px; }
+      .prod-name { font-size:15px; }
+
+      .c-list { gap:18px; }
+
+      footer { padding:36px 12px 24px; }
+    }
+
+    /* ══ GLITCH no H1 gradiente ══ */
+    .hero h1 .line-2 {
+      position: relative;
+      animation: glitchText 8s ease-in-out 3s infinite;
+    }
+
+    .hero h1 .line-2::before,
+    .hero h1 .line-2::after {
+      content: attr(data-text);
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+    }
+
+    @keyframes glitchText {
+      0%,88%,100% { transform:none; }
+      89% { transform:translateX(-3px) skewX(-2deg); }
+      89.5% { transform:translateX(3px) skewX(2deg); }
+      90% { transform:none; }
+      90.5% { transform:translateX(-2px); }
+      91% { transform:none; }
+    }
+
+    /* ══ SCAN LINES na hero ══ */
+    .hero-scan {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent, transparent 3px,
+        rgba(0,229,255,0.018) 3px, rgba(0,229,255,0.018) 4px
+      );
+      pointer-events: none; z-index: 0;
+      animation: scanMove 12s linear infinite;
+    }
+
+    @keyframes scanMove {
+      from { background-position: 0 0; }
+      to   { background-position: 0 100px; }
+    }
+
+    /* ══ NAV ATIVA ══ */
+    .h-nav a { position: relative; }
+    .h-nav a.nav-on { color: var(--white); }
+    .h-nav a.nav-on::after {
+      content: '';
+      position: absolute; bottom: -5px; left: 0; right: 0;
+      height: 2px; background: var(--cyan); border-radius: 2px;
+      animation: navLine .3s ease;
+    }
+    @keyframes navLine { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+    /* ══ TYPING CURSOR no hero-sub ══ */
+    #heroSub .cursor {
+      display: inline-block;
+      width: 2px; height: .85em;
+      background: var(--cyan);
+      margin-left: 2px; vertical-align: text-bottom;
+      animation: blink .8s step-end infinite;
+    }
+
+    /* ══ STAGGER SERVIÇOS (nth-child crescente) ══ */
+    .svc-item:nth-child(1)[data-r] { transition-delay: .04s; }
+    .svc-item:nth-child(2)[data-r] { transition-delay: .12s; }
+    .svc-item:nth-child(3)[data-r] { transition-delay: .20s; }
+    .svc-item:nth-child(4)[data-r] { transition-delay: .28s; }
+    .svc-item:nth-child(5)[data-r] { transition-delay: .36s; }
+    .svc-item:nth-child(6)[data-r] { transition-delay: .44s; }
+
+    /* ══ STAT BOUNCE quando revelado ══ */
+    .stat-num.bounced {
+      animation: statBounce .6s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    @keyframes statBounce {
+      0%   { transform: scale(.7); }
+      60%  { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    /* ══ PRODUTO CARD glow reveal ══ */
+    .prod-card[data-r].vis {
+      animation: prodGlow .8s ease both;
+    }
+
+    @keyframes prodGlow {
+      0%  { box-shadow: 0 0 0 rgba(0,229,255,0); }
+      50% { box-shadow: 0 0 40px rgba(0,229,255,.18); }
+      100%{ box-shadow: none; }
+    }
+
+    /* ══ TIMELINE STAGGER ══ */
+    .tl-item { opacity:0; transform:translateX(20px); transition:opacity .5s ease, transform .5s ease; }
+    .tl-item.tl-vis { opacity:1; transform:none; }
+    .tl-item:nth-child(1).tl-vis { transition-delay:.05s; }
+    .tl-item:nth-child(2).tl-vis { transition-delay:.15s; }
+    .tl-item:nth-child(3).tl-vis { transition-delay:.25s; }
+    .tl-item:nth-child(4).tl-vis { transition-delay:.35s; }
+
+    /* ══ FOOTER ITEMS reveal ══ */
+    .foot-inner > * { opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+    .foot-inner > *.foot-vis { opacity:1; transform:none; }
+    .foot-inner > *:nth-child(2) { transition-delay:.1s; }
+    .foot-inner > *:nth-child(3) { transition-delay:.2s; }
+  </style>
+</head>
+<body>
+
+<div id="bar" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="h-inner">
+    <a href="#home" class="h-logo" aria-label="Itec Tecnologia">
+      <img src="logo.png" alt="Itec Automação e Segurança Eletrônica">
+    </a>
+    <nav class="h-nav" aria-label="Navegação principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="vitrine.html" class="h-vitrine" aria-label="Ver vitrine de produtos">Vitrine</a>
+      <a href="#contato" class="h-cta">Fale conosco</a>
+    </nav>
+    <button class="h-toggle" id="toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mnav" aria-label="Menu mobile">
+  <a href="#servicos" onclick="closeNav()">Serviços</a>
+  <a href="#produtos" onclick="closeNav()">Produtos</a>
+  <a href="#sobre"    onclick="closeNav()">Sobre</a>
+  <a href="vitrine.html" onclick="closeNav()">Vitrine</a>
+  <a href="#contato"  onclick="closeNav()">Fale conosco</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" aria-label="Início">
+  <svg class="hero-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M60 0L0 0 0 60" fill="none" stroke="#00E5FF" stroke-width=".4"/>
+      </pattern>
+    </defs>
+    <rect width="1440" height="900" fill="url(#grid)"/>
+    <circle cx="200" cy="400" r="1.5" fill="#00E5FF" opacity=".6"/>
+    <circle cx="600" cy="200" r="1.5" fill="#00E5FF" opacity=".6"/>
+    <circle cx="900" cy="600" r="1.5" fill="#00E5FF" opacity=".6"/>
+    <circle cx="1200" cy="300" r="1.5" fill="#2979FF" opacity=".6"/>
+    <path d="M200 400 L600 200 L900 600 L1200 300" fill="none" stroke="#00E5FF" stroke-width=".6" stroke-dasharray="4 8" opacity=".4"/>
+  </svg>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-chip">Bauru — SP · Desde 2013</div>
+    <h1>
+      <span class="line-1">Automação</span>
+      <span class="line-2" data-text="&amp; Segurança">&amp; Segurança</span>
+    </h1>
+    <p class="hero-sub" id="heroSub"></p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5514XXXXXXXXX" class="btn-fill" aria-label="WhatsApp Itec">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicitar orçamento
+      </a>
+      <a href="#servicos" class="btn-ghost">Ver serviços</a>
+      <a href="vitrine.html" class="btn-ghost" style="border-color:var(--line);color:var(--cyan);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Ver vitrine
+      </a>
+    </div>
+    <div class="hero-tags" aria-label="Áreas de atuação">
+      <span class="hero-tag">Redes estruturadas</span>
+      <span class="hero-tag">CFTV &amp; câmeras</span>
+      <span class="hero-tag">Automação residencial</span>
+      <span class="hero-tag">Alarmes</span>
+      <span class="hero-tag">PABX &amp; telefonia</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.05 12A11 11 0 0 1 23 12"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M9 12a3 3 0 0 1 6 0"/><circle cx="12" cy="12" r="1"/></svg>Rede estruturada</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>CFTV</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Alarmes</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Automação</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>PABX</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Servidores</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1.05 12A11 11 0 0 1 23 12"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M9 12a3 3 0 0 1 6 0"/><circle cx="12" cy="12" r="1"/></svg>Rede estruturada</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>CFTV</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Alarmes</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Automação</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>PABX</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Servidores</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats" aria-label="Números da Itec">
+  <div class="stats-inner">
+    <div class="stat" data-r="up" data-d="1">
+      <div class="stat-num" data-counter data-target="11" data-suffix="+">11+</div>
+      <div class="stat-label">Anos de mercado</div>
+    </div>
+    <div class="stat" data-r="up" data-d="2">
+      <div class="stat-num" data-counter data-target="6" data-suffix="">6</div>
+      <div class="stat-label">Especialidades técnicas</div>
+    </div>
+    <div class="stat" data-r="up" data-d="3">
+      <div class="stat-num">100<span style="font-size:.5em">%</span></div>
+      <div class="stat-label">Instalação inclusa</div>
+    </div>
+    <div class="stat" data-r="up" data-d="4">
+      <div class="stat-num">BRU</div>
+      <div class="stat-label">Bauru e região</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div data-r="up">
+    <div class="sec-eyebrow">Serviços</div>
+    <h2 class="sec-title">O que a<br><em>Itec resolve</em></h2>
+  </div>
+  <div class="svc-list">
+    <div class="svc-item" data-r="up" data-d="1">
+      <span class="svc-num">01</span>
+      <div class="svc-body">
+        <div class="svc-name">Rede estruturada</div>
+        <p class="svc-desc">Projeto e instalação de redes cabeadas Cat5e/Cat6 e wireless de alta performance. Configuração completa de switches, roteadores e access points para residências e empresas.</p>
+        <div class="svc-tags"><span class="svc-tag">Cabeada</span><span class="svc-tag">Wireless</span><span class="svc-tag">Wi-Fi</span></div>
+      </div>
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.05 12A11 11 0 0 1 23 12"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M9 12a3 3 0 0 1 6 0"/><circle cx="12" cy="12" r="1"/></svg></div>
+    </div>
+    <div class="svc-item" data-r="up" data-d="2">
+      <span class="svc-num">02</span>
+      <div class="svc-body">
+        <div class="svc-name">CFTV e câmeras</div>
+        <p class="svc-desc">Instalação de câmeras analógicas e IP com DVRs/NVRs e acesso remoto em tempo real pelo smartphone. Monitoramento 24h da sua propriedade.</p>
+        <div class="svc-tags"><span class="svc-tag">IP</span><span class="svc-tag">Analógica</span><span class="svc-tag">Acesso remoto</span></div>
+      </div>
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    </div>
+    <div class="svc-item" data-r="up" data-d="3">
+      <span class="svc-num">03</span>
+      <div class="svc-body">
+        <div class="svc-name">Alarme e segurança eletrônica</div>
+        <p class="svc-desc">Centrais de alarme com sensores de presença, abertura e monitoramento remoto. Proteção completa para residências e comércios com acionamento via app.</p>
+        <div class="svc-tags"><span class="svc-tag">Residencial</span><span class="svc-tag">Comercial</span><span class="svc-tag">Monitoramento</span></div>
+      </div>
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    </div>
+    <div class="svc-item" data-r="up" data-d="1">
+      <span class="svc-num">04</span>
+      <div class="svc-body">
+        <div class="svc-name">Automação residencial</div>
+        <p class="svc-desc">Transforme sua casa em uma smart home com interruptores inteligentes, integração com Alexa e Google Home, automação de iluminação, ar-condicionado e muito mais.</p>
+        <div class="svc-tags"><span class="svc-tag">Smart Home</span><span class="svc-tag">Alexa</span><span class="svc-tag">Google Home</span></div>
+      </div>
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    </div>
+    <div class="svc-item" data-r="up" data-d="2">
+      <span class="svc-num">05</span>
+      <div class="svc-body">
+        <div class="svc-name">Telefonia e PABX</div>
+        <p class="svc-desc">Instalação e configuração de centrais PABX/PBX, ramais, interfones e vídeo porteiros para escritórios, condomínios e residências.</p>
+        <div class="svc-tags"><span class="svc-tag">PABX</span><span class="svc-tag">Interfone</span><span class="svc-tag">Vídeo porteiro</span></div>
+      </div>
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+    </div>
+    <div class="svc-item" data-r="up" data-d="3">
+      <span class="svc-num">06</span>
+      <div class="svc-body">
+        <div class="svc-name">Computadores e servidores</div>
+        <p class="svc-desc">Manutenção de computadores e notebooks, instalação e configuração de servidores. Suporte técnico presencial e remoto com diagnóstico preciso e agilidade.</p>
+        <div class="svc-tags"><span class="svc-tag">Manutenção</span><span class="svc-tag">Servidores</span><span class="svc-tag">Suporte remoto</span></div>
+      </div>
+      <div class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="produtos">
+  <div data-r="up">
+    <div class="sec-eyebrow">Produtos</div>
+    <h2 class="sec-title">Equipamentos<br><em>que instalamos</em></h2>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card" data-r="up" data-d="1">
+      <div class="prod-num" aria-hidden="true">01</div>
+      <div class="prod-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+      <div class="prod-name">Interruptores smart</div>
+      <p class="prod-desc">Controle a iluminação da sua casa pelo celular ou por voz. Compatível com Alexa e Google Assistente. Substituição simples dos interruptores convencionais.</p>
+    </div>
+    <div class="prod-card" data-r="up" data-d="2">
+      <div class="prod-num" aria-hidden="true">02</div>
+      <div class="prod-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="4"/><path d="M2 12c0 4.4 4.5 8 10 8s10-3.6 10-8"/><path d="M2 12c0-4.4 4.5-8 10-8s10 3.6 10 8"/></svg></div>
+      <div class="prod-name">Alexa — Amazon Echo</div>
+      <p class="prod-desc">Assistente de voz Amazon Alexa integrado à automação residencial para controle total por voz. Central de comando de todos os dispositivos inteligentes da casa.</p>
+    </div>
+    <div class="prod-card" data-r="up" data-d="3">
+      <div class="prod-num" aria-hidden="true">03</div>
+      <div class="prod-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="prod-name">Câmeras de segurança</div>
+      <p class="prod-desc">Câmeras IP e analógicas com visão noturna, alta resolução e acesso remoto. Soluções para ambientes internos e externos, residenciais e corporativos.</p>
+    </div>
+    <div class="prod-card" data-r="up" data-d="4">
+      <div class="prod-num" aria-hidden="true">04</div>
+      <div class="prod-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="prod-name">Alarmes e sensores</div>
+      <p class="prod-desc">Centrais de alarme com sensores de presença e abertura, acionamento via app e sirene. Proteção inteligente que avisa imediatamente qualquer tentativa de invasão.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="sobre">
+  <div class="about-inner">
+    <div class="about-left" data-r="left">
+      <div class="about-logo-wrap">
+        <img src="logo.png" alt="Itec Tecnologia">
+        <span class="about-since">EST. 2013</span>
+      </div>
+      <h2 class="sec-title">Tecnologia que <em>simplifica</em> sua vida</h2>
+      <p class="about-lead">Fundada por profissionais com experiência em instituições financeiras, a Itec nasceu em Bauru com o propósito de tornar a tecnologia acessível e confiável para residências e empresas.</p>
+    </div>
+    <div class="about-timeline" data-r="right">
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-year">2013</div>
+          <div class="tl-title">Fundação da Itec</div>
+          <p class="tl-text">Abrimos as portas em Bauru com foco em redes estruturadas e telefonia para o mercado corporativo local.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-year">2015—2018</div>
+          <div class="tl-title">Expansão para segurança eletrônica</div>
+          <p class="tl-text">Incorporamos CFTV, alarmes e controle de acesso, atendendo condomínios, comércios e residências da região.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-year">2019—2022</div>
+          <div class="tl-title">Smart home e automação</div>
+          <p class="tl-text">Adicionamos automação residencial — interruptores inteligentes, Alexa e integração de dispositivos.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div></div>
+        <div>
+          <div class="tl-year">Hoje</div>
+          <div class="tl-title">Referência em Bauru</div>
+          <p class="tl-text">Com carteira de clientes em crescimento contínuo, seguimos entregando felicidade e conforto tecnológico para cada cliente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VITRINE SECTION -->
+<section id="vitrine" style="
+  padding: 120px max(24px, calc((100% - 1280px) / 2));
+  background: var(--bg2);
+  border-top: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+">
+  <!-- glow decorativo -->
+  <div style="
+    position:absolute; bottom:-120px; left:-80px;
+    width:400px; height:400px; border-radius:50%;
+    background:radial-gradient(circle,rgba(41,121,255,.12) 0%,transparent 65%);
+    pointer-events:none;
+  " aria-hidden="true"></div>
+
+  <div style="
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:72px; align-items:center;
+    position:relative; z-index:1;
+    max-width:1280px;
+  " data-r="up">
+
+    <!-- Texto -->
+    <div>
+      <div style="
+        display:inline-flex; align-items:center; gap:12px;
+        font-family:'Space Mono',monospace; font-size:11px;
+        color:var(--cyan); letter-spacing:3px; text-transform:uppercase;
+        margin-bottom:20px;
+      ">
+        <span style="display:block;width:32px;height:1px;background:var(--cyan)"></span>
+        Nossa vitrine
+      </div>
+      <h2 style="
+        font-size:clamp(32px,4vw,52px); font-weight:700;
+        letter-spacing:-1.5px; line-height:1.05;
+        color:var(--white); margin-bottom:20px;
+      ">Explore nossos<br><span style="
+        background:linear-gradient(90deg,var(--blue),var(--cyan));
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        background-clip:text;
+      ">produtos online</span></h2>
+      <p style="
+        font-size:16px; color:var(--muted); line-height:1.75;
+        font-weight:300; margin-bottom:36px; max-width:440px;
+      ">Acesse nossa vitrine digital e veja todos os produtos e equipamentos disponíveis — câmeras, alarmes, automação, redes e muito mais. Consulte preços e entre em contato direto.</p>
+      <a href="vitrine.html" style="
+        display:inline-flex; align-items:center; gap:10px;
+        background:var(--cyan); color:var(--bg);
+        font-family:'Space Grotesk',sans-serif;
+        font-size:14px; font-weight:700; letter-spacing:.5px;
+        padding:14px 32px; border-radius:2px;
+        text-decoration:none; border:2px solid var(--cyan);
+        transition:all .3s;
+      " onmouseover="this.style.background='transparent';this.style.color='var(--cyan)'"
+         onmouseout="this.style.background='var(--cyan)';this.style.color='var(--bg)'"
+         aria-label="Acessar vitrine de produtos Itec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        Acessar vitrine
+      </a>
+    </div>
+
+    <!-- Browser mockup -->
+    <div style="
+      background:var(--bg); border:1px solid var(--line);
+      border-radius:12px; overflow:hidden;
+    ">
+      <!-- Browser chrome fake -->
+      <div style="
+        background:rgba(0,229,255,.04); border-bottom:1px solid var(--line);
+        padding:12px 16px; display:flex; align-items:center; gap:10px;
+      ">
+        <div style="display:flex;gap:6px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:rgba(255,90,90,.6)"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:rgba(255,200,60,.6)"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:rgba(60,200,80,.6)"></span>
+        </div>
+        <div style="
+          flex:1; background:rgba(0,229,255,.06);
+          border:1px solid var(--line); border-radius:4px;
+          padding:5px 12px; font-family:'Space Mono',monospace;
+          font-size:11px; color:var(--muted); letter-spacing:.5px;
+          white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        ">itectecnologia2.egestor.com.br/vitrine/</div>
+      </div>
+      <!-- Vitrine preview placeholder -->
+      <div style="
+        height:280px; display:flex; flex-direction:column;
+        align-items:center; justify-content:center; gap:16px;
+        background:linear-gradient(135deg,rgba(4,8,15,.8),rgba(8,13,24,.9));
+      ">
+        <div style="
+          width:64px; height:64px; border-radius:16px;
+          background:rgba(0,229,255,.1); border:1px solid var(--line);
+          display:flex; align-items:center; justify-content:center;
+          color:var(--cyan);
+        ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="30" height="30"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;">Vitrine digital</div>
+          <div style="font-size:13px;color:var(--muted);">Câmeras · Alarmes · Automação · Redes</div>
+        </div>
+        <a href="vitrine.html" style="
+          font-size:12px; font-weight:600; letter-spacing:1px;
+          text-transform:uppercase; color:var(--cyan);
+          border:1px solid var(--line); padding:8px 20px; border-radius:2px;
+          text-decoration:none; transition:.2s;
+        ">Abrir vitrine →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contato">
+  <div class="contact-left" data-r="left">
+    <h2 class="sec-title">Vamos <em>conversar?</em></h2>
+    <p class="contact-sub">Estamos prontos para atender sua residência ou empresa em Bauru e região. Entre em contato e receba um orçamento sem compromisso.</p>
+    <div class="c-list">
+      <div class="c-row" data-r="left" data-d="1">
+        <div class="c-bullet"></div>
+        <div><div class="c-lbl">E-mail</div><div class="c-val"><a href="mailto:itecbauru@gmail.com">itecbauru@gmail.com</a></div></div>
+      </div>
+      <div class="c-row" data-r="left" data-d="2">
+        <div class="c-bullet"></div>
+        <div><div class="c-lbl">Endereço</div><div class="c-val">Av. do Hipódromo, 8-55, sala 202<br>Bauru — SP · CEP 17032-620</div></div>
+      </div>
+      <div class="c-row" data-r="left" data-d="3">
+        <div class="c-bullet"></div>
+        <div><div class="c-lbl">Horário</div><div class="c-val">Segunda a sexta-feira · 08:00 às 18:00</div></div>
+      </div>
+      <div class="c-row" data-r="left" data-d="4">
+        <div class="c-bullet"></div>
+        <div><div class="c-lbl">Site</div><div class="c-val"><a href="https://www.itecautomacaoeseguranca.com.br">itecautomacaoeseguranca.com.br</a></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right" data-r="right">
+    <h3>Solicite seu orçamento</h3>
+    <p>Nossa equipe retorna rapidamente com a solução ideal para o seu projeto. Instalação presencial ou suporte remoto em toda a região.</p>
+    <div class="cta-stack">
+      <a href="https://wa.me/5514XXXXXXXXX" class="cta-wa" aria-label="WhatsApp Itec Tecnologia">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chamar no WhatsApp
+      </a>
+      <a href="mailto:itecbauru@gmail.com" class="cta-mail" aria-label="E-mail Itec Tecnologia">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Enviar e-mail
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="foot-logo"><img src="logo.png" alt="Itec Tecnologia"></div>
+      <p class="foot-desc">Automação e segurança eletrônica em Bauru — SP. Redes, câmeras, alarmes, smart home e telefonia desde 2013.</p>
+    </div>
+    <div>
+      <div class="foot-title">Serviços</div>
+      <ul class="foot-links">
+        <li><a href="#servicos">Redes estruturadas</a></li>
+        <li><a href="#servicos">CFTV e câmeras</a></li>
+        <li><a href="#servicos">Alarme e segurança</a></li>
+        <li><a href="#servicos">Automação residencial</a></li>
+        <li><a href="#servicos">Telefonia e PABX</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-title">Contato</div>
+      <ul class="foot-links">
+        <li><a href="https://wa.me/5514XXXXXXXXX">WhatsApp</a></li>
+        <li><a href="mailto:itecbauru@gmail.com">itecbauru@gmail.com</a></li>
+        <li><a href="#contato">Bauru — SP</a></li>
+        <li><a href="#contato">Seg — Sex · 08h às 18h</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2025 Itec Automação e Segurança Eletrônica. Todos os direitos reservados.</p>
+    <span>CNPJ: 18.407.150/0001-80</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/5514XXXXXXXXX" class="wfloat" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div id="root"></div>
+<div id="montesite-footer-badge"></div>
+<script src="https://vaabpicspdbolvutnscp.supabase.co/functions/v1/get-footer-iframe"></script>
+
+<script>
+  const hdr    = document.getElementById('hdr');
+  const bar    = document.getElementById('bar');
+  const toggle = document.getElementById('toggle');
+  const mnav   = document.getElementById('mnav');
+
+  /* ── Menu mobile ── */
+  toggle.addEventListener('click', () => {
+    const open = mnav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  function closeNav() {
+    mnav.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }
+
+  document.addEventListener('click', e => {
+    if (!toggle.contains(e.target) && !mnav.contains(e.target)) closeNav();
+  });
+
+  /* ── Header + Progress bar ── */
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY;
+    const t = document.documentElement.scrollHeight - window.innerHeight;
+    hdr.classList.toggle('solid', s > 40);
+    bar.style.width = t > 0 ? `${(s/t)*100}%` : '0%';
+  }, { passive:true });
+
+  /* ── Scroll reveal ── */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); }
+    });
+  }, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-r]').forEach(el => ro.observe(el));
+
+  /* ── Counter animado ── */
+  function runCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const dur    = 1600;
+    const start  = performance.now();
+    el.classList.add('bounced');
+    (function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  const co = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); co.unobserve(e.target); } });
+  }, { threshold:.8 });
+
+  document.querySelectorAll('[data-counter]').forEach(el => co.observe(el));
+
+  /* ── Timeline stagger ── */
+  const tlObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('tl-vis'); tlObs.unobserve(e.target); }
+    });
+  }, { threshold:.15 });
+
+  document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
+
+  /* ── Footer reveal ── */
+  const footObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('foot-vis'); footObs.unobserve(e.target); }
+    });
+  }, { threshold:.15 });
+
+  document.querySelectorAll('.foot-inner > *').forEach(el => footObs.observe(el));
+
+  /* ── Nav ativa por seção ── */
+  const navLinks = document.querySelectorAll('.h-nav a[href^="#"]');
+
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.toggle('nav-on',
+          a.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, { threshold:.35 });
+
+  document.querySelectorAll('section[id], div[id="home"]').forEach(s => navObs.observe(s));
+
+  /* ── Typewriter no hero-sub ── */
+  const subEl  = document.getElementById('heroSub');
+  const subTxt = 'Conectamos, protegemos e automatizamos residências e empresas com tecnologia de ponta. Redes, câmeras, alarmes e smart home.';
+
+  function typeHero() {
+    let i = 0;
+    const cur = '<span class="cursor" aria-hidden="true"></span>';
+    const t = setInterval(() => {
+      subEl.innerHTML = subTxt.slice(0, i) + cur;
+      i++;
+      if (i > subTxt.length) { clearInterval(t); subEl.innerHTML = subTxt + cur; }
+    }, 22);
+  }
+
+  setTimeout(typeHero, 700);
+
+  /* ── Parallax orbs no scroll ── */
+  const orbs = document.querySelectorAll('.orb');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    orbs.forEach((o, i) => {
+      o.style.transform = `translateY(${y * (i % 2 === 0 ? .12 : -.08)}px)`;
+    });
+  }, { passive:true });
+
+  /* ── Mouse parallax nos orbs ── */
+  document.addEventListener('mousemove', e => {
+    const cx = window.innerWidth  / 2;
+    const cy = window.innerHeight / 2;
+    const dx = (e.clientX - cx) / cx;
+    const dy = (e.clientY - cy) / cy;
+    orbs.forEach((o, i) => {
+      const f = (i + 1) * 10;
+      o.style.marginLeft = `${dx * f}px`;
+      o.style.marginTop  = `${dy * f}px`;
+    });
+  });
+</script>
+</body>
+</html>
